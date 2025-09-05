@@ -1,0 +1,4 @@
+.sidebar { border-right: 1px solid var(--border); min-width: 220px; }
+.sidebar-inner { padding: 16px; }
+.side-links { display: flex; flex-direction: column; gap: 8px; }
+.side-links a { color: var(--text); }
