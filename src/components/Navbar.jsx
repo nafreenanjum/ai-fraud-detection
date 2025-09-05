@@ -1,40 +1,46 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  const { token, logout, role } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await logout();
-    navigate("/login");
-  };
-
   return (
-    <nav className="navbar">
-      <div className="container nav-inner">
-        <Link to="/" className="brand">AI Pay</Link>
-        <div className="links">
-          {token && <Link to="/wallet">Wallet</Link>}
-          {token && <Link to="/pay">Pay</Link>}
-          {token && <Link to="/payments/history">History</Link>}
-          {token && <Link to="/fraud/score">Fraud</Link>}
-          {role === "admin" && <Link to="/admin">Admin</Link>}
-          {!token ? (
-            <>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Signup</Link>
-            </>
-          ) : (
-            <button onClick={handleLogout} style={{ marginLeft: 12 }}>
-              Logout
-            </button>
-          )}
+    <nav className="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
+      <div className="container">
+        <Link className="navbar-brand fw-bold text-primary fs-4" to="/">
+          AI Pay
+        </Link>
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+
+        <div className="collapse navbar-collapse justify-content-end" id="mainNav">
+          <ul className="navbar-nav gap-3">
+            <li className="nav-item">
+              <Link className="nav-link text-secondary fw-semibold" to="/">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-secondary fw-semibold" to="/login">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-secondary fw-semibold" to="/signup">
+                Signup
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
   );
 }
-
